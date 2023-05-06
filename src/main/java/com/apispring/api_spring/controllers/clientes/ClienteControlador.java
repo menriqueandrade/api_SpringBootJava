@@ -38,12 +38,11 @@ public class ClienteControlador {
     @PostMapping("/guardar")
     public ResponseEntity<Cliente> guardarCliente(@RequestBody Cliente cliente) {
         //validar si lo campos vienen vacios
-        if (cliente.getNombre().isEmpty() || cliente.getApellido().isEmpty() || cliente.getEmail().isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-           
+         if (cliente.getNombre().isEmpty() || cliente.getApellido().isEmpty() || cliente.getEmail().isEmpty()) {
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
         Cliente nuevo_cliente = clienteservicio.guardar(cliente);
-    
+        System.out.println(nuevo_cliente);
         return new ResponseEntity<>(nuevo_cliente, HttpStatus.CREATED);
     }
 
