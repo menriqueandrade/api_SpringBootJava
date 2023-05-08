@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apispring.api_spring.models.clientes.Cliente;
 import com.apispring.api_spring.services.clientes.ClienteServicioImplementacion;
 
-
-
-
 @RestController
 @RequestMapping("/clientController")
 @CrossOrigin(origins = "*")
@@ -37,10 +34,6 @@ public class ClienteControlador {
 
     @PostMapping("/guardar")
     public ResponseEntity<Cliente> guardarCliente(@RequestBody Cliente cliente) {
-        //validar si lo campos vienen vacios
-         if (cliente.getNombre().isEmpty() || cliente.getApellido().isEmpty() || cliente.getEmail().isEmpty()) {
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
         Cliente nuevo_cliente = clienteservicio.guardar(cliente);
         System.out.println(nuevo_cliente);
         return new ResponseEntity<>(nuevo_cliente, HttpStatus.CREATED);
@@ -52,6 +45,7 @@ public class ClienteControlador {
         return new ResponseEntity<>(clientePorId, HttpStatus.OK);
 
     }
+
     @PutMapping("/cliente/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable long id, @RequestBody Cliente cliente) {
         Cliente clienteporId = clienteservicio.obtenerPorId(id);
@@ -62,6 +56,7 @@ public class ClienteControlador {
         Cliente cliente_actualizado = clienteservicio.guardar(clienteporId);
         return new ResponseEntity<>(cliente_actualizado, HttpStatus.CREATED);
     }
+
     @DeleteMapping("/cliente/{id}")
     public ResponseEntity<HashMap<String, Boolean>> eliminarCliente(@PathVariable long id) {
         this.clienteservicio.eliminar(id);

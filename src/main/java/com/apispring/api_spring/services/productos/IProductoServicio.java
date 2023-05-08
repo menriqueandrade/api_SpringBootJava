@@ -6,6 +6,9 @@ import com.apispring.api_spring.models.productos.Producto;
 
 public interface IProductoServicio {
     public List<Producto> obtenerTodo();
+
     public Producto guardar(Producto producto);
-    
+
+    public Producto obtenerPorId(long id);
+
 }

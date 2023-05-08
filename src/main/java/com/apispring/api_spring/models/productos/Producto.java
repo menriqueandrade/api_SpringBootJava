@@ -27,13 +27,13 @@ public class Producto implements Serializable {
 
     // relacion Cliente
     @OneToOne(mappedBy = "producto")
-    private Cliente id_producto;
+    private Cliente cliente;
 
     public Producto() {
 
     }
 
-    public Producto( String nombre, String valor) {
+    public Producto(String nombre, String valor) {
         this.nombre = nombre;
         this.valor = valor;
     }
@@ -52,6 +52,26 @@ public class Producto implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }

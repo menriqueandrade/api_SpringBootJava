@@ -2,9 +2,10 @@ package com.apispring.api_spring.models.clientes;
 
 import java.io.Serializable;
 
-
 import com.apispring.api_spring.models.productos.Producto;
 import com.fasterxml.jackson.annotation.JsonCreator;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
@@ -16,25 +17,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
+@JsonIgnoreProperties(value = { "id" }, allowGetters = true)
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
     private String nombre;
     private String apellido;
     private String email;
 
     @OneToOne
-    @JoinColumn(
-        name = "id_producto",
-        referencedColumnName = "id"
-
-    )
+    @JoinColumn(name = "id_producto")
     private Producto producto;
+
     @JsonCreator
-    public Cliente(long id, String nombre, String apellido, String email, @JsonProperty("producto") Producto producto) {
-        this.id = id;
+    public Cliente(
+
+            @JsonProperty("nombre") String nombre,
+            @JsonProperty("apellido") String apellido,
+            @JsonProperty("email") String email,
+            @JsonProperty("producto") Producto producto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -87,5 +91,5 @@ public class Cliente implements Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
+
 }
