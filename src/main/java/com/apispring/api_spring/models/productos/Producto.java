@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -22,20 +21,32 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
-
     private String valor;
-
-    // relacion Cliente
+    // bidireccional
     @OneToOne(mappedBy = "producto")
     private Cliente cliente;
 
     public Producto() {
+    }
+
+    public Producto(long id, String nombre, String valor, Cliente cliente) {
+        this.id = id;
+        this.nombre = nombre;
+        this.valor = valor;
+        this.cliente = cliente;
 
     }
 
-    public Producto(String nombre, String valor) {
-        this.nombre = nombre;
-        this.valor = valor;
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -52,26 +63,6 @@ public class Producto implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
 }

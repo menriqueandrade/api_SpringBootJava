@@ -3,17 +3,14 @@ package com.apispring.api_spring.models.clientes;
 import java.io.Serializable;
 
 import com.apispring.api_spring.models.productos.Producto;
-import com.fasterxml.jackson.annotation.JsonCreator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -27,25 +24,20 @@ public class Cliente implements Serializable {
     private String nombre;
     private String apellido;
     private String email;
-
+    // JoincOLUMN BUSCA PRODUCT_ID PARA RELACIONAR
     @OneToOne
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    @JsonCreator
-    public Cliente(
+    public Cliente() {
+    }
 
-            @JsonProperty("nombre") String nombre,
-            @JsonProperty("apellido") String apellido,
-            @JsonProperty("email") String email,
-            @JsonProperty("producto") Producto producto) {
+    public Cliente(long id, String nombre, String apellido, String email, Producto producto) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.producto = producto;
-    }
-
-    public Cliente() {
     }
 
     public static long getSerialversionuid() {
