@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Web.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +32,14 @@ public class ClienteControlador {
         return clienteservicio.obtenerTodo();
 
     }
+
+    //
+    @PutMapping("/{clienteId}/productos/{productoId}")
+    public Cliente asignarProductoCliente(@PathVariable Long clienteId,
+            @PathVariable Long productoId) {
+        return clienteservicio.asignarProductoCliente(clienteId, productoId);
+    }
+    //
 
     @PostMapping("/guardar")
     public ResponseEntity<Cliente> guardarCliente(@RequestBody Cliente cliente) {
